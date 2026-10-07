@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:text="${title} + ' · ' + ${theme.logoText}">BookRats</title>
+    <link rel="stylesheet" th:href="@{/css/theme.css}"/>
+    <style th:inline="text">
+        /*<![CDATA[*/
+        :root {
+            --color-primary: [[${theme.primaryColor}]];
+            --color-secondary: [[${theme.secondaryColor}]];
+            --color-accent: [[${theme.accentColor}]];
+            --color-bg: [[${theme.backgroundColor}]];
+            --color-text: [[${theme.textColor}]];
+        }
+        /*]]>*/
+    </style>
+</head>
+<body>
+<!-- fragmento isolado: nao renderizado sozinho -->
+</body>
+</html>

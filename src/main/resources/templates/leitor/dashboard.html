@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(title='Minha area')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<main class="page-content">
+    <h1>Ola, <span th:text="${usuario.fullName}">Leitor</span>!</h1>
+    <p>Esta e a sua area de leitor do <strong th:text="${theme.logoText}">BookRats</strong>.</p>
+
+    <section class="card">
+        <h2>Meus dados</h2>
+        <ul>
+            <li><strong>Usuario:</strong> <span th:text="${usuario.username}"></span></li>
+            <li><strong>E-mail:</strong> <span th:text="${usuario.email}"></span></li>
+            <li>
+                <strong>Perfis:</strong>
+                <span th:each="role, iter : ${usuario.roles}">
+                    <span th:text="${role.label}"></span><span th:if="!${iter.last}">, </span>
+                </span>
+            </li>
+        </ul>
+    </section>
+
+    <section class="card">
+        <h2>Em breve</h2>
+        <p>
+            Aqui entrarao as funcionalidades do tema do projeto (ex.: estante de
+            livros, status de leitura, ranking entre amigos). Esta tela ja esta
+            protegida por login e pronta para ser estendida.
+        </p>
+    </section>
+</main>
+</body>
+</html>

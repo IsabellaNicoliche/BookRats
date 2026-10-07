@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(title='Administracao')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<main class="page-content">
+    <h1>Painel administrativo</h1>
+    <p>Gerencie os perfis de acesso e o status das contas.</p>
+
+    <p class="alert alert-success" th:if="${mensagemSucesso}" th:text="${mensagemSucesso}"></p>
+    <p class="alert alert-error" th:if="${mensagemErro}" th:text="${mensagemErro}"></p>
+
+    <section class="card">
+        <!--
+          Cada linha tem seu proprio <form>, mas um <form> nao pode ser filho
+          direto de <tr>/<td> (HTML invalido). Em vez de aninhar, cada form
+          fica fora da tabela (escondido) e os campos de cada linha usam o
+          atributo HTML5 "form" para apontar para o form correspondente pelo
+          id - isso mantem a tabela com HTML valido e cada linha salva de
+          forma independente.
+        -->
+        <table class="user-table">
+            <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>E-mail</th>
+                <th>Perfis</th>
+                <th>Ativo</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="u : ${usuarios}">
+                <td th:text="${u.username}"></td>
+                <td th:text="${u.email}"></td>
+                <td>
+                    <label th:each="perfil : ${perfisDisponiveis}" class="role-checkbox">
+                        <input type="checkbox" name="roles" th:value="${perfil}"
+                               th:checked="${u.roles.contains(perfil)}"
+                               th:attr="form=${'form-' + u.id}"/>
+                        <span th:text="${perfil.label}"></span>
+                    </label>
+                </td>
+                <td>
+                    <input type="checkbox" name="enabled" value="true" th:checked="${u.enabled}"
+                           th:attr="form=${'form-' + u.id}"/>
+                </td>
+                <td>
+                    <button type="submit" class="btn-secondary" th:attr="form=${'form-' + u.id}">Salvar</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form th:each="u : ${usuarios}" th:id="${'form-' + u.id}"
+              th:action="@{/admin/usuarios/atualizar}" method="post" style="display:none">
+            <input type="hidden" name="userId" th:value="${u.id}"/>
+        </form>
+    </section>
+</main>
+</body>
+</html>

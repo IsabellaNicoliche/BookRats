@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(title='Pagina nao encontrada')}"></head>
+<body class="auth-page">
+<main class="auth-card">
+    <h1>404</h1>
+    <p>Esta pagina nao existe.</p>
+    <p><a th:href="@{/login}">Ir para o login</a></p>
+</main>
+</body>
+</html>

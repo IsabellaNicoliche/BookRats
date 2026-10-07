@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(title='Moderacao')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<main class="page-content">
+    <h1>Painel de moderacao</h1>
+    <p>
+        Ola, <strong th:text="${usuario.fullName}">Moderador</strong> — esta
+        area e visivel apenas para perfis <em>MODERADOR</em> e <em>ADMIN</em>.
+    </p>
+
+    <section class="card">
+        <h2>Em breve</h2>
+        <p>
+            Aqui entrarao as ferramentas de moderacao de conteudo gerado por
+            usuarios (ex.: aprovar/remover resenhas, moderar sorteios). A
+            autorizacao de rota ja esta configurada em
+            <code>SecurityConfig</code> (<code>/moderador/**</code>).
+        </p>
+    </section>
+</main>
+</body>
+</html>
